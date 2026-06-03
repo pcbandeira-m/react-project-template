@@ -15,20 +15,22 @@ function App() {
 
 	return (
 		<>
-			<Botao
-				label="Subtrair"
-				action={decrementar}
-				className="br-button secondary mr-3 "
-			/>
-			{/* o componente Botao não recebe label, logo, não tem nada para tratar o label. Assim, é preciso que o componente receba essa propriedade - PROPS -> valores recebidos como parâmetros da função que podem ser acessados*/}
+			<div className="d-flex align-items-center">
+				<Botao
+					label="Subtrair"
+					action={decrementar}
+					className="br-button secondary mr-3 "
+				/>
+				{/* o componente Botao não recebe label, logo, não tem nada para tratar o label. Assim, é preciso que o componente receba essa propriedade - PROPS -> valores recebidos como parâmetros da função que podem ser acessados*/}
 
-			<span className="numero mb-0">{numero}</span>
+				<span className="numero mb-0">{numero}</span>
 
-			<Botao
-				label="Somar"
-				action={incrementar}
-				className="br-button primary ml-3"
-			/>
+				<Botao
+					label="Somar"
+					action={incrementar}
+					className="br-button primary ml-3"
+				/>
+			</div>
 		</>
 	);
 }
