@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import Botao from "./components/Botao";
 
 function App() {
 	const [numero, setNumero] = useState(0);
@@ -14,21 +15,20 @@ function App() {
 
 	return (
 		<>
-			<button
-				onClick={() => {
-					decrementar();
-				}}
-			>
-				-
-			</button>
-			{numero}
-			<button
-				onClick={() => {
-					incrementar();
-				}}
-			>
-				+
-			</button>
+			<Botao
+				label="Subtrair"
+				action={decrementar}
+				className="br-button secondary mr-3 "
+			/>
+			{/* o componente Botao não recebe label, logo, não tem nada para tratar o label. Assim, é preciso que o componente receba essa propriedade - PROPS -> valores recebidos como parâmetros da função que podem ser acessados*/}
+
+			<span className="numero mb-0">{numero}</span>
+
+			<Botao
+				label="Somar"
+				action={incrementar}
+				className="br-button primary ml-3"
+			/>
 		</>
 	);
 }
