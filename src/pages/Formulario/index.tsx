@@ -12,17 +12,23 @@ As seguintes funcionalidades devem ser implementadas:
 */
 
 function Formulario() {
-	const { handleSubmit, register } = useForm();
+	const { handleSubmit, register, reset, getValues } = useForm();
 	// register é usado para registrar os campos do formulário e precisa ser inserido em seus inputs
 	// handleSubmit é usado para lidar com o envio do formulário
 
 	// função para manipular o formulário antes da submissão para sabermos se o valor será pego e enviado para uma API, se vai ser enviado para uma tela etc.
-	function dataHandler(data) {
-		console.log(data);
+	function dataHandler() {
+		const { name, email, phone, age } = getValues();
+
+		if (name != "" && email !== "" && phone !== "" && age !== "") {
+			console.log("Formulário enviado com sucesso!");
+		} else {
+			console.log("Por favor, preencha todos os campos.");
+		}
 	}
 
-	function resetForm() {
-		// aqui podemos usar a função reset do react-hook-form para limpar os campos do formulário
+	function resetValues() {
+		reset();
 	}
 
 	return (
@@ -38,10 +44,7 @@ function Formulario() {
 									id="name"
 									type="text"
 									placeholder="Digite seu nome"
-									{...register("name", {
-										required: "True",
-										maxLength: 20,
-									})}
+									{...register("name")}
 								/>
 							</div>
 							<div className="br-input mt-3">
@@ -50,10 +53,7 @@ function Formulario() {
 									id="email"
 									type="text"
 									placeholder="Digite seu email"
-									{...register("email", {
-										required: "True",
-										pattern: /^\S+@\S+$/i,
-									})}
+									{...register("email")}
 								/>
 							</div>
 							<div className="br-input mt-3">
@@ -62,11 +62,7 @@ function Formulario() {
 									id="phone"
 									type="text"
 									placeholder="Digite seu telefone"
-									{...register("phone", {
-										required: "True",
-										pattern:
-											/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/i,
-									})}
+									{...register("phone")}
 								/>
 							</div>
 							<div className="br-input mt-3">
@@ -75,16 +71,13 @@ function Formulario() {
 									id="age"
 									type="number"
 									placeholder="Digite sua idade"
-									{...register("age", {
-										required: "True",
-										min: 0,
-										max: 120,
-									})}
+									{...register("age")}
 								/>
 							</div>
 							<button
 								className="br-button secondary mt-4"
-								type="reset"
+								type="button"
+								onClick={resetValues}
 							>
 								Limpar
 							</button>
