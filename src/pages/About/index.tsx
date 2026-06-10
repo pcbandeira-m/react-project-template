@@ -21,6 +21,12 @@ function About() {
 									>
 										Sobre nós
 									</Link>
+									<Link
+										to="/formulario"
+										className="br-button"
+									>
+										Formulário
+									</Link>
 								</div>
 							</div>
 						</div>
