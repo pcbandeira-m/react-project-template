@@ -1,23 +1,17 @@
 import { Link } from "react-router-dom";
-// import axios from "axios"; (removido após a criação do axiosInstance)
-import { useEffect } from "react";
-// import axiosInstance from "../services/axiosInstance"; (removido após a utilização do CharactersService)
+import { useEffect, useState } from "react";
 import CharactersService from "../services/CharactersService";
 
-// Para fins de estudo, será utilizada uma API de Harry Potter chamada HP-API!
+export default function Home() {
+	const [personagens, setPersonagens] = useState<any[]>([]);
 
-function Home() {
 	function handleData() {
-		// axiosInstance.get("characters").then((res) => {
-		// 	// parâmetro da arrow function é o res, que é a resposta da requisição.
-		// 	const { data } = res;
-		// 	console.log(data);
-		// });
 		CharactersService.listarPersonagens()
 			.then((res) => {
 				const { data } = res;
 				console.log(data);
-			}) // a função realiza algo e, se algo der errado, entra no catch
+				setPersonagens(data);
+			})
 			.catch((err) => {
 				console.error(err);
 			});
@@ -61,16 +55,19 @@ function Home() {
 				</div>
 			</header>
 
-			<div className="d-flex justify-content-center align-items-center mt-5">
-				<button
-					className="br-button primary"
-					onClick={handleData}
-				>
-					Um teste
-				</button>
-			</div>
+			{/* renderização da lista de personagens */}
+			{personagens.map((personagem) => {
+				// return <p>{personagem.name}</p>;
+				return (
+					<>
+						<img
+							src={personagem.image}
+							style={{ width: "auto", height: "200px" }}
+						/>
+						<p>{personagem.name}</p>
+					</>
+				);
+			})}
 		</>
 	);
 }
-
-export default Home;
