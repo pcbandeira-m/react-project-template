@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import CharactersService from "../services/CharactersService";
+import defaultCharacterImg from "../assets/hp-character.jpg";
+
+/*
+Exercício Prático: Consuma a API a seguir e liste, em formato de card, o nome e a foto de cada personagem.
+Extra: Crie uma renderização condicional para quando não existir a imagem de um personagem na API. Nesse caso, renderize uma imagem da Disney (?) de sua preferência.
+*/
 
 export default function Home() {
 	const [personagens, setPersonagens] = useState<any[]>([]);
@@ -24,7 +30,7 @@ export default function Home() {
 
 	return (
 		<>
-			<header className="br-header">
+			<header className="br-header mb-5">
 				<div className="container-lg d-flex justify-content-center align-items-center">
 					<div className="header-top">
 						<div className="header-actions">
@@ -60,11 +66,28 @@ export default function Home() {
 				// return <p>{personagem.name}</p>;
 				return (
 					<>
-						<img
-							src={personagem.image}
-							style={{ width: "auto", height: "200px" }}
-						/>
-						<p>{personagem.name}</p>
+						<div className="col-sm d-flex justify-content-center">
+							<div className="col-sm-6 col-md-4 col-lg-3">
+								<div className="br-card d-flex justify-content-center">
+									<div className="card-content pb-5">
+										<div className="text-weight-semi-bold text-up-02 mb-2">
+											{personagem.name}
+										</div>
+										<img
+											src={
+												personagem.image
+													? personagem.image
+													: defaultCharacterImg
+											}
+											style={{
+												width: "auto",
+												height: "300px",
+											}}
+										/>
+									</div>
+								</div>
+							</div>
+						</div>
 					</>
 				);
 			})}
