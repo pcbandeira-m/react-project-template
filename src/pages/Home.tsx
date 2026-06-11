@@ -1,12 +1,32 @@
 import { Link } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios"; (removido após a criação do axiosInstance)
+import { useEffect } from "react";
+// import axiosInstance from "../services/axiosInstance"; (removido após a utilização do CharactersService)
+import CharactersService from "../services/CharactersService";
 
 // Para fins de estudo, será utilizada uma API de Harry Potter chamada HP-API!
 
 function Home() {
 	function handleData() {
-		axios.get("https://hp-api.onrender.com/api/characters");
+		// axiosInstance.get("characters").then((res) => {
+		// 	// parâmetro da arrow function é o res, que é a resposta da requisição.
+		// 	const { data } = res;
+		// 	console.log(data);
+		// });
+		CharactersService.listarPersonagens()
+			.then((res) => {
+				const { data } = res;
+				console.log(data);
+			}) // a função realiza algo e, se algo der errado, entra no catch
+			.catch((err) => {
+				console.error(err);
+			});
 	}
+
+	// executar assim que a página carregar -> colchetes vazios
+	useEffect(() => {
+		handleData();
+	}, []);
 
 	return (
 		<>
