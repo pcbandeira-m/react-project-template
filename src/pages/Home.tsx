@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 import CharactersService from "../services/CharactersService";
 import defaultCharacterImg from "../assets/hp-character.jpg";
 
-/*
-Exercício Prático: Consuma a API a seguir e liste, em formato de card, o nome e a foto de cada personagem.
-Extra: Crie uma renderização condicional para quando não existir a imagem de um personagem na API. Nesse caso, renderize uma imagem da Disney (?) de sua preferência.
-*/
+interface IPersonagem {
+	image: string;
+	name: string;
+}
 
 export default function Home() {
-	const [personagens, setPersonagens] = useState<any[]>([]);
+	const [personagens, setPersonagens] = useState<IPersonagem[]>([]);
 
 	function handleData() {
 		CharactersService.listarPersonagens()

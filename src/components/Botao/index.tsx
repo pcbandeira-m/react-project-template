@@ -1,13 +1,18 @@
-function Botao(props) {
+interface BotaoProps {
+	action: () => void;
+	label: string;
+	className: string;
+}
+
+export default function Botao(props: BotaoProps) {
 	const { label, action, className } = props;
+
 	return (
 		<button
 			onClick={action}
-			className={className} // className foi passada como props para que seja possível construção de estilo diferentes para cada instância do componente Botao.
+			className={className}
 		>
 			{label}
 		</button>
 	);
 }
-
-export default Botao;
