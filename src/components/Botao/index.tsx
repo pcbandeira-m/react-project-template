@@ -1,12 +1,8 @@
-interface BotaoProps {
-	action: () => void;
-	label: string;
-	className: string;
-}
+import { IBotaoProps } from "./IBotaoProps";
 
-export default function Botao(props: BotaoProps) {
-	const { label, action, className } = props;
+/** Componente de botão */
 
+export default function Botao({ action, label, className }: IBotaoProps) {
 	return (
 		<button
 			onClick={action}
